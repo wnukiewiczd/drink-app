@@ -1,4 +1,4 @@
-package pl.poznan.put.cs.lab2_155858_barman.models.api
+package pl.poznan.put.cs.lab2_155858_barman.models
 
 data class Drink(
     val idDrink: String,
