@@ -18,8 +18,13 @@ import com.android.volley.toolbox.Volley
 import org.json.JSONArray
 import org.json.JSONObject
 import pl.poznan.put.cs.lab2_155858_barman.models.api.Drink
+import com.google.gson.Gson
+
 
 class DrinkList : AppCompatActivity() {
+
+    private val gson = Gson()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -50,59 +55,7 @@ class DrinkList : AppCompatActivity() {
                     val drinkNames = mutableListOf<String>()
                     for (i in 0 until drinksArray.length()) {
                         val drinkObject: JSONObject = drinksArray.getJSONObject(i)
-                        val drink = Drink(
-                            idDrink = drinkObject.optString("idDrink"),
-                            strDrink = drinkObject.optString("strDrink"),
-                            strDrinkAlternate = drinkObject.optString("strDrinkAlternate"),
-                            strTags = drinkObject.optString("strTags"),
-                            strVideo = drinkObject.optString("strVideo"),
-                            strCategory = drinkObject.optString("strCategory"),
-                            strIBA = drinkObject.optString("strIBA"),
-                            strAlcoholic = drinkObject.optString("strAlcoholic"),
-                            strGlass = drinkObject.optString("strGlass"),
-                            strInstructions = drinkObject.optString("strInstructions"),
-                            strInstructionsES = drinkObject.optString("strInstructionsES"),
-                            strInstructionsDE = drinkObject.optString("strInstructionsDE"),
-                            strInstructionsFR = drinkObject.optString("strInstructionsFR"),
-                            strInstructionsIT = drinkObject.optString("strInstructionsIT"),
-                            strInstructionsZH_HANS = drinkObject.optString("strInstructionsZH-HANS"),
-                            strInstructionsZH_HANT = drinkObject.optString("strInstructionsZH-HANT"),
-                            strDrinkThumb = drinkObject.optString("strDrinkThumb"),
-                            strIngredient1 = drinkObject.optString("strIngredient1"),
-                            strIngredient2 = drinkObject.optString("strIngredient2"),
-                            strIngredient3 = drinkObject.optString("strIngredient3"),
-                            strIngredient4 = drinkObject.optString("strIngredient4"),
-                            strIngredient5 = drinkObject.optString("strIngredient5"),
-                            strIngredient6 = drinkObject.optString("strIngredient6"),
-                            strIngredient7 = drinkObject.optString("strIngredient7"),
-                            strIngredient8 = drinkObject.optString("strIngredient8"),
-                            strIngredient9 = drinkObject.optString("strIngredient9"),
-                            strIngredient10 = drinkObject.optString("strIngredient10"),
-                            strIngredient11 = drinkObject.optString("strIngredient11"),
-                            strIngredient12 = drinkObject.optString("strIngredient12"),
-                            strIngredient13 = drinkObject.optString("strIngredient13"),
-                            strIngredient14 = drinkObject.optString("strIngredient14"),
-                            strIngredient15 = drinkObject.optString("strIngredient15"),
-                            strMeasure1 = drinkObject.optString("strMeasure1"),
-                            strMeasure2 = drinkObject.optString("strMeasure2"),
-                            strMeasure3 = drinkObject.optString("strMeasure3"),
-                            strMeasure4 = drinkObject.optString("strMeasure4"),
-                            strMeasure5 = drinkObject.optString("strMeasure5"),
-                            strMeasure6 = drinkObject.optString("strMeasure6"),
-                            strMeasure7 = drinkObject.optString("strMeasure7"),
-                            strMeasure8 = drinkObject.optString("strMeasure8"),
-                            strMeasure9 = drinkObject.optString("strMeasure9"),
-                            strMeasure10 = drinkObject.optString("strMeasure10"),
-                            strMeasure11 = drinkObject.optString("strMeasure11"),
-                            strMeasure12 = drinkObject.optString("strMeasure12"),
-                            strMeasure13 = drinkObject.optString("strMeasure13"),
-                            strMeasure14 = drinkObject.optString("strMeasure14"),
-                            strMeasure15 = drinkObject.optString("strMeasure15"),
-                            strImageSource = drinkObject.optString("strImageSource"),
-                            strImageAttribution = drinkObject.optString("strImageAttribution"),
-                            strCreativeCommonsConfirmed = drinkObject.optString("strCreativeCommonsConfirmed"),
-                            dateModified = drinkObject.optString("dateModified")
-                        )
+                        val drink = gson.fromJson(drinkObject.toString(), Drink::class.java)
                         drinkNames.add(drink.strDrink)
                         drinksList.add(drink)
                     }
